@@ -1,0 +1,27 @@
+{
+  "name": "type-script",
+  "version": "1.0.0",
+  "description": "TypeScript to Grahpql and websocket services with Multi APIS REST",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "graphql-codegen"
+  },
+  "author": "My",
+  "license": "ISC",
+  "dependencies": {
+    "@types/graphql": "^14.5.0",
+    "apollo-server": "^3.13.0",
+    "axios": "^1.7.2",
+    "graphql-import-node": "^0.0.5"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.9",
+    "@graphql-codegen/typescript-operations": "^4.2.3",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.0",
+    "@graphql-codegen/typescript-resolvers": "^4.2.1",
+    "ts-node": "^10.9.2"
+  }
+}

@@ -1,0 +1,201 @@
+# schema.graphql
+
+type Query {
+  empresas: [Empresa]
+  empresa(id: ID!): Empresa
+  practicas: [Practica]
+  practica(id: ID!): Practica
+  estados: [Estado]
+  estado(id: ID!): Estado
+  estudiantes: [Estudiante]
+  estudiante(id: ID!): Estudiante
+  requisitos: [Requisito]
+  requisito(id: ID!): Requisito
+  estudiantePorRequisitos: [EstudiantePorRequisito]
+  estudiantePorRequisito(id: ID!): EstudiantePorRequisito
+  carreras: [Carrera]
+  carrera(id: ID!): Carrera
+}
+
+type Mutation {
+  createEmpresa(input: CreateEmpresaInput!): Empresa
+  updateEmpresa(id: ID!, input: UpdateEmpresaInput!): Empresa
+  deleteEmpresa(id: ID!): Boolean
+  
+  createPractica(input: CreatePracticaInput!): Practica
+  updatePractica(id: ID!, input: UpdatePracticaInput!): Practica
+  deletePractica(id: ID!): Boolean
+  
+  createEstado(input: CreateEstadoInput!): Estado
+  updateEstado(id: ID!, input: UpdateEstadoInput!): Estado
+  deleteEstado(id: ID!): Boolean
+
+  createEstudiante(input: CreateEstudianteInput!): Estudiante
+  updateEstudiante(id: ID!, input: UpdateEstudianteInput!): Estudiante
+  deleteEstudiante(id: ID!): Boolean
+
+  createRequisito(input: CreateRequisitoInput!): Requisito
+  updateRequisito(id: ID!, input: UpdateRequisitoInput!): Requisito
+  deleteRequisito(id: ID!): Boolean
+
+  createEstudiantePorRequisito(input: CreateEstudiantePorRequisitoInput!): EstudiantePorRequisito
+  updateEstudiantePorRequisito(id: ID!, input: UpdateEstudiantePorRequisitoInput!): EstudiantePorRequisito
+  deleteEstudiantePorRequisito(id: ID!): Boolean
+
+  createCarrera(input: CreateCarreraInput!): Carrera
+  updateCarrera(id: ID!, input: UpdateCarreraInput!): Carrera
+  deleteCarrera(id: ID!): Boolean
+}
+
+type Empresa {
+  id: ID!
+  nombre_empresa: String!
+  nombre_tutor_empresa: String!
+  email_tutor_empresa: String!
+  telefono_empresa: String
+  direccion_empresa: String
+  num_practicantes: Int
+  area_practicas: String
+  practicas: [Practica]
+}
+
+type Practica {
+  id: ID!
+  empresa: Empresa
+  estudiante: Estudiante
+  estado: Estado
+  horas_por_cumplir: Int
+  fecha_inicio: String
+  fecha_fin: String
+}
+
+type Estado {
+  id: ID!
+  nombre_estado: String!
+  descripcion_estado: String
+  practicas: [Practica]
+}
+
+type Estudiante {
+  id: ID!
+  carrera: Carrera
+  nombre_estudiante: String!
+  apellido_estudiante: String!
+  correo_estudiante: String!
+  fecha_nacimiento: String!
+  requisitos: [EstudiantePorRequisito]
+}
+
+type Requisito {
+  id: ID!
+  nombre_requisito: String!
+  estudiantes: [EstudiantePorRequisito]
+}
+
+type EstudiantePorRequisito {
+  id: ID!
+  estudiante: Estudiante
+  requisito: Requisito
+  es_cumplido: Boolean!
+}
+
+type Carrera {
+  id: ID!
+  nombre_carrera: String!
+  num_semestres: Int!
+  estudiantes: [Estudiante]
+}
+
+input CreateEmpresaInput {
+  nombre_empresa: String!
+  nombre_tutor_empresa: String!
+  email_tutor_empresa: String!
+  telefono_empresa: String
+  direccion_empresa: String
+  num_practicantes: Int
+  area_practicas: String
+}
+
+input UpdateEmpresaInput {
+  nombre_empresa: String
+  nombre_tutor_empresa: String
+  email_tutor_empresa: String
+  telefono_empresa: String
+  direccion_empresa: String
+  num_practicantes: Int
+  area_practicas: String
+}
+
+input CreatePracticaInput {
+  empresa_id: ID!
+  estudiante_id: ID!
+  estado_id: ID!
+  horas_por_cumplir: Int
+  fecha_inicio: String
+  fecha_fin: String
+}
+
+input UpdatePracticaInput {
+  empresa_id: ID
+  estudiante_id: ID
+  estado_id: ID
+  horas_por_cumplir: Int
+  fecha_inicio: String
+  fecha_fin: String
+}
+
+input CreateEstadoInput {
+  nombre_estado: String!
+  descripcion_estado: String
+}
+
+input UpdateEstadoInput {
+  nombre_estado: String
+  descripcion_estado: String
+}
+
+input CreateEstudianteInput {
+  carrera_id: ID!
+  nombre_estudiante: String!
+  apellido_estudiante: String!
+  correo_estudiante: String!
+  fecha_nacimiento: String!
+}
+
+input UpdateEstudianteInput {
+  carrera_id: ID
+  nombre_estudiante: String
+  apellido_estudiante: String
+  correo_estudiante: String
+  fecha_nacimiento: String
+}
+
+input CreateRequisitoInput {
+  nombre_requisito: String!
+}
+
+input UpdateRequisitoInput {
+  nombre_requisito: String
+}
+
+input CreateEstudiantePorRequisitoInput {
+  estudiante_id: ID!
+  requisito_id: ID!
+  es_cumplido: Boolean!
+}
+
+input UpdateEstudiantePorRequisitoInput {
+  estudiante_id: ID
+  requisito_id: ID
+  es_cumplido: Boolean
+}
+
+input CreateCarreraInput {
+  nombre_carrera: String!
+  num_semestres: Int!
+}
+
+input UpdateCarreraInput {
+  nombre_carrera: String
+  num_semestres: Int
+}
